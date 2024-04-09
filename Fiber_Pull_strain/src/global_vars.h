@@ -3,11 +3,11 @@
 
 #include <Arduino.h>  // need String Class 
 
-extern unsigned long stabilizingtime;
-extern boolean _tare;
-extern float calibrationValue;
-extern const int calVal_eepromAdress;
-extern const int serialPrintInterval;
+extern unsigned long STABILIZING_TIME;
+extern boolean _TARE;
+extern float CALIBRATION_VALUE;
+extern const int CALVAL_EEPROM_ADDRESS;
+extern const int SERIAL_PRINT_INTERVAL;
 
 // UI commands
 extern byte RUN_CALIBRATON;

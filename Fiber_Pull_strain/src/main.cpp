@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <load_sensor_operation.h>
+#include <serial_communication.h>
 
 
 void setup() {
@@ -7,5 +8,6 @@ void setup() {
   init_load_cell();
 }
 void loop() {
+  monitorUI();
   readData();
 }

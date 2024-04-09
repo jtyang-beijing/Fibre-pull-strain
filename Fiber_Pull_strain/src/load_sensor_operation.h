@@ -6,3 +6,4 @@ void init_load_cell();
 void calibrate();
 void changeSavedCalFactor();
 void readData();
+void tare();

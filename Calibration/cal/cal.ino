@@ -15,7 +15,7 @@ unsigned long t = 0;
 float calFactor = 1.0;
 
 void setup() {
-  Serial.begin(57600); delay(10);
+  Serial.begin(115200); delay(10);
   float tt=0;
   EEPROM.get(calVal_eepromAdress,tt);
   Serial.println("calFactor read from EEPROM = " + String(tt));
