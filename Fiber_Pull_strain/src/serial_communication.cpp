@@ -1,5 +1,6 @@
 #include <load_sensor_operation.h>
 #include <global_vars.h>
+#include <motor_control.h>
 /*  monitorUI will run in main loop, followed by readData.
     When there is serial data in, monitorUI will hold main
     loop and make justment for what to do:
@@ -32,5 +33,16 @@ void monitorUI()
       if (inByte == RUN_CALIBRATON) {calibrate();}
       else if (inByte == SET_CAL_FACTOR) {changeSavedCalFactor();}
       else if (inByte == RUN_TARE) {tare();}
+      else if (inByte == RESET_MOTOR_POSITION){resetMotorPosition();}
+      else if (inByte == DRIVE_MOTOR)
+      {
+        String destination = Serial.readString();
+        char charBuffer[20];
+        destination.toCharArray(charBuffer,20);
+        char *dest;
+        long Destination = strtol(charBuffer,&dest,10);
+
+        driveMotor(Destination);
+      };
     }
 }
