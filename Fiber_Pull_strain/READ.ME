@@ -1,7 +1,20 @@
-#include <load_sensor_operation.h>
-#include <global_vars.h>
-#include <motor_control.h>
-/*  monitorUI will run in main loop, followed by readData.
+//load sensor related
+unsigned long STABILIZING_TIME = 2000;
+boolean _TARE = true;
+float CALIBRATION_VALUE = 901.67;
+const int CALVAL_EEPROM_ADDRESS = 0;
+const int SERIAL_PRINT_INTERVAL = 50;
+// motor related
+float MOTOR_SPEED = 20000;
+float ACCELORATION = 25000;
+// UI commands
+byte RUN_CALIBRATON = 'c';
+byte RUN_TARE = 't';
+byte SET_CAL_FACTOR = 'r';
+byte DRIVE_MOTOR = 'm'; m followed by destination, set destination to minus number for backward running.
+byte RESET_MOTOR_POSITION = 'o';
+
+monitorUI will run in main loop, followed by readData.
     When there is serial data in, monitorUI will hold main
     loop and make justment for what to do:
     'c' = RUN_CALIBRATON, means run calibration.
@@ -23,27 +36,6 @@
         3 - wait confirming store or not. 'y' will store in to EEPROM, 
             'n' will cause new value ignored.
     't' = RUN_TARE, means run tare. 
-
-*/
-void monitorUI()
-{
-    if (Serial.available() > 0) 
-    {
-      char inByte = Serial.read();
-      if (inByte == RUN_CALIBRATON) {calibrate();}
-      else if (inByte == SET_CAL_FACTOR) {changeSavedCalFactor();}
-      else if (inByte == RUN_TARE) {tare();}
-      else if (inByte == RESET_MOTOR_POSITION){resetMotorPosition();}
-      //else if (inByte == HAND_SHAKE){Serial.println("FiberPull");}
-      else if (inByte == DRIVE_MOTOR)
-      {
-        String destination = Serial.readString();
-        char charBuffer[20];
-        destination.toCharArray(charBuffer,20);
-        char *dest;
-        DESTINATION = strtol(charBuffer,&dest,10);
-
-        driveMotor(DESTINATION);
-      };
-    }
-}
+    'm' followed by destination, set destination to minus number for backward running.
+    'h' hand shaking request, reply with 'FiberPull'.
+    'o' reset motor current position to Zero.

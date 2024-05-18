@@ -2,6 +2,7 @@
 #include <pin_map.h>
 #include <Arduino.h>
 #include <global_vars.h>
+#include <load_sensor_operation.h>
 
 AccelStepper myStepper(AccelStepper::DRIVER, STEP_PIN, DIR_PIN);
 void initMotor()
@@ -16,9 +17,14 @@ void initMotor()
 void driveMotor(long destination)
 {
     myStepper.moveTo(destination);
-    while(myStepper.currentPosition() != destination 
-    && digitalRead(FAR_END)
-    && digitalRead(CLOSE_END)) myStepper.run();
+    while(CURRENT_POSITION != destination
+     && digitalRead(FAR_END)
+     && digitalRead(CLOSE_END)) 
+     {
+        myStepper.run();
+        CURRENT_POSITION = myStepper.currentPosition();
+        // Serial.println("d:"+ String(CURRENT_POSITION));
+     }
 }
 
 void resetMotorPosition()

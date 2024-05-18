@@ -43,7 +43,7 @@ void readData()
     if (millis() > t + SERIAL_PRINT_INTERVAL) {
       float i = LoadCell.getData();
       //Serial.print("Load_cell output val: ");
-      Serial.println(i);
+      Serial.println("l:"+String(i));
       //LCD Print
       //lcd.clear(); // Clears the display 
       //lcd.setCursor(0,0);  // set the cursor to column 0, line 0

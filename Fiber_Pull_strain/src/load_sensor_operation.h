@@ -7,3 +7,4 @@ void calibrate();
 void changeSavedCalFactor();
 void readData();
 void tare();
+extern HX711_ADC LoadCell;

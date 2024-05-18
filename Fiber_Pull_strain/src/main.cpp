@@ -2,6 +2,7 @@
 #include <load_sensor_operation.h>
 #include <serial_communication.h>
 #include <motor_control.h>
+#include <global_vars.h>
 
 
 void setup() {

@@ -7,11 +7,14 @@ float CALIBRATION_VALUE = 901.67;
 const int CALVAL_EEPROM_ADDRESS = 0;
 const int SERIAL_PRINT_INTERVAL = 50;
 // motor related
-float MOTOR_SPEED = 20000;
-float ACCELORATION = 25000;
+int MOTOR_SPEED = 50000;
+int ACCELORATION = 25000;
+long CURRENT_POSITION =0;
+long DESTINATION = 0;
 // UI commands
 byte RUN_CALIBRATON = 'c';
 byte RUN_TARE = 't';
 byte SET_CAL_FACTOR = 'r';
 byte DRIVE_MOTOR = 'm';
 byte RESET_MOTOR_POSITION = 'o';
+byte HAND_SHAKE = 'h';
